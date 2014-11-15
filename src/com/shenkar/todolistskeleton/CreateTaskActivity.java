@@ -1,6 +1,7 @@
 package com.shenkar.todolistskeleton;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.Menu;
@@ -14,6 +15,7 @@ public class CreateTaskActivity extends Activity {
 
 	private Button btnCreateTask;
 	private EditText txtTaskDesc; 
+	private Intent resultOfCreate;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,10 @@ public class CreateTaskActivity extends Activity {
 		btnCreateTask.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Editable str = txtTaskDesc.getText();
-				Toast.makeText(CreateTaskActivity.this, str.toString()+" : task must be added!", Toast.LENGTH_LONG).show();
+				Editable editableStr = txtTaskDesc.getText();
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra("result",editableStr.toString());
+				setResult(RESULT_OK,returnIntent);
 				finish();
 			}
 		});
